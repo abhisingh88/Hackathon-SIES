@@ -74,11 +74,15 @@
             height: 300px;
             object-fit: cover;
         }
+        .corDiv{
+            height: 600px;
+        }
     </style>
 </head>
 
 <body>
 
+    <%- include('../partials/navbar') -%>
    
     <div id="demo" class="carousel slide" data-ride="carousel" >
 
@@ -90,9 +94,9 @@
         </ul>
 
         <!-- The slideshow -->
-        <div class="carousel-inner img-fluid">
+        <div class="carousel-inner corDiv img-fluid">
             <div class="carousel-item active">
-                <img src="https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/Zugpsitze_mountain.jpg?crop=0,176,3008,1654&wid=4000&hei=2200&scl=0.752" alt="Los Angeles" width="100%" height="300px">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/da/Taj-Mahal.jpg" alt="Los Angeles" width="100%" height="400px">
             </div>
             <div class="carousel-item">
                 <img src="https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/Zugpsitze_mountain.jpg?crop=0,176,3008,1654&wid=4000&hei=2200&scl=0.752" alt="Chicago" width="100%" height="100%">
@@ -131,7 +135,7 @@
             dolorum alias. <a href="">read more</a>
         </div>
         <div class="pay-btn">
-            <a href="">Proceed to buy</a>
+            <a href="/form">Proceed to buy</a>
         </div>
     </div>
 

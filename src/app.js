@@ -38,10 +38,10 @@ app.get('/bookingDetails/',async function (req, res) {
   data = JSON.stringify(sale)
   QRCode.toDataURL(data)
     .then((url) => {
-      res.status(201).render('pages/index', { qrcode: url });
+      res.status(201).render('pages/recipet', { qrcode: url });
     })
     .catch((err) => {
-      res.status(401).render('pages/index', { qrcode: "abhi" });
+      res.status(401).render('pages/recipet', { qrcode: "abhi" });
     });
 });
 
