@@ -3,13 +3,9 @@ const app = express()
 const path = require("path")
 const ejs = require("ejs");
 const cookieParser = require('cookie-parser')
+const QRCode = require('qrcode')
 
 // ejs config
-// const template_path = path.join(__dirname, "../templates/views")
-// const parials_path = path.join(__dirname, "../templates/partials")
-
-// app.set("views", template_path)
-// ejs.registerPartials(parials_path)
 app.set("view engine", "ejs");
 
 const port = process.env.PORT || 3000
@@ -17,14 +13,20 @@ const port = process.env.PORT || 3000
 const static_path = path.join(__dirname, "../public")
 app.use(express.static(static_path))
 
-
 app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 
 
 app.get('/', function(req, res) {
-  res.render('pages/index');
+
+  QRCode.toDataURL("Hello World !")
+    .then((url) => {
+      res.render('pages/index',{qrcode:url});
+    })
+    .catch((err) => {
+      res.render('pages/index',{qrcode:"abhi"});
+    }); 
 });
 
 app.listen(port, () => {
