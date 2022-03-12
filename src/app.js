@@ -27,6 +27,14 @@ app.get('/', function(req, res) {
   res.render('pages/index');
 });
 
+app.get('/nav',function(req,res){
+  res.render('pages/nav')
+})
+
+app.get('/form',function(req,res){
+  res.render('pages/form')
+})
+
 app.listen(port, () => {
   console.log(`server is running at port no. ${port}`);
 })
