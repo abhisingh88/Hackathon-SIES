@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 const path = require("path")
-const ejs = require("ejs");
 const cookieParser = require('cookie-parser')
 const QRCode = require('qrcode')
 const Sales = require("./models/sales");
@@ -22,27 +21,11 @@ app.use(express.urlencoded({ extended: false }))
 
 
 app.get('/', function (req, res) {
-  QRCode.toDataURL("Hello World !")
-    .then((url) => {
-      res.status(201).render('pages/index', { qrcode: url });
-    })
-    .catch((err) => {
-      res.status(401).render('pages/index', { qrcode: "abhi" });
-    });
-});
-
-app.get('/bookingDetails/',async function (req, res) {
-  saleData = req.query.salesdataId
-  console.log(saleData);
-  const sale = await Sales.findById({ _id: saleData });
-  data = JSON.stringify(sale)
-  QRCode.toDataURL(data)
-    .then((url) => {
-      res.status(201).render('pages/recipet', { qrcode: url });
-    })
-    .catch((err) => {
-      res.status(401).render('pages/recipet', { qrcode: "abhi" });
-    });
+  try {
+    res.status(201).render("pages/index");
+  } catch (error) {
+    res.status(401).send(error)
+  }
 });
 
 app.get('/form', async function (req, res) {
@@ -56,7 +39,7 @@ app.get('/form', async function (req, res) {
 
 app.post('/form', async function (req, res) {
   try {
-    console.log("hello");
+    // console.log("hello");
     const sale = new Sales({
       name: req.body.name,
       email: req.body.email,
@@ -80,11 +63,24 @@ app.post('/form', async function (req, res) {
 app.get('/details', function (req, res) {
   try {
     res.status(201).render('pages/moreDetails');
-
   } catch (error) {
     res.status(401).send(error)
   }
 })
+
+app.get('/bookingDetails/',async function (req, res) {
+  saleData = req.query.salesdataId
+  console.log(saleData);
+  const sale = await Sales.findById({ _id: saleData });
+  data = JSON.stringify(sale)
+  QRCode.toDataURL(data)
+    .then((url) => {
+      res.status(201).render('pages/recipet', { qrcode: url });
+    })
+    .catch((err) => {
+      res.status(401).render('pages/recipet', { qrcode: "abhi" });
+    });
+});
 
 
 app.listen(port, () => {
